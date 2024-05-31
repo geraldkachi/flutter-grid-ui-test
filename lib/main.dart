@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      // initialRoute: '/',r
       title: 'Grid Ui',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const BottomNav(),  
       routes: {
-          '/': (context) => const BottomNav(),
+          '/home': (context) => const BottomNav(),
       },
     );
   }
