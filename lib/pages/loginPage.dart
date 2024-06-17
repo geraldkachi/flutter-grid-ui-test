@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_ui_text/conponents/my_button.dart';
-import 'package:flutter_ui_text/conponents/my_textfield.dart';
+// import 'package:flutter_ui_text/conponents/my_textfield.dart';
+import 'package:flutter_ui_text/helper/help_func.dart';
 
 class LoginScreen extends StatefulWidget {
+  final void Function()? onTap;
+  const LoginScreen({super.key, this.onTap});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -13,6 +18,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      // fitzgeraldkachi@gmail.com      
+      // show loading circle
+      showDialog(context: context,
+          builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              )); 
+      // pop of loading circle
+      if (context.mounted) Navigator.pop(context);
+    } //display any error
+    on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
+      print(e); // Handle error here
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
               MyButton(
                 text: 'Login',
                 onTap: () {
-                  if (_formKey.currentState!.validate())
-                    Navigator.pushNamed(context, '/home');
+                  if (_formKey.currentState!.validate()) {
+                    // Navigator.pushNamed(context, '/home');
+                    _login();
+                  }
                 },
               ),
               // ElevatedButton(
@@ -111,8 +140,13 @@ class _LoginScreenState extends State<LoginScreen> {
               // ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/register');
+                  if (widget.onTap != null) {
+                      widget.onTap!();
+                    }
                 },
+                // onPressed: () {
+                //   Navigator.pushNamed(context, '/register');
+                // },
                 child: Text('Don\'t have an account? Register'),
               ),
 
@@ -124,8 +158,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Theme.of(context).colorScheme.inversePrimary)),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                      if (widget.onTap != null) {
+                      widget.onTap!();
+                    }
                     },
+                    // onPressed: () {
+                    //   Navigator.pushNamed(context, '/register');
+                    // },
                     child: Text('Register',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black)),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui_text/auth/auth.dart';
 import 'package:flutter_ui_text/pages/bottomnav.dart';
 import 'package:flutter_ui_text/pages/crud.dart';
 import 'package:flutter_ui_text/pages/loginPage.dart';
-import 'package:flutter_ui_text/pages/registerPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_ui_text/theme/dark-mode.dart';
 import 'package:flutter_ui_text/theme/light-mode.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/crud',
+      initialRoute: '/lg',
       title: 'Grid Ui',
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(
@@ -35,9 +35,10 @@ class MyApp extends StatelessWidget {
       darkTheme: darkMode,
        home: LoginScreen(),
       routes: {
+        '/lg': (context) => AuthPage(),
         '/crud': (context) => CrudFire(),
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
+        // '/login': (context) => LoginScreen(),
+        // '/register': (context) => RegisterScreen(),
         '/home': (context) => BottomNav(),
       }, 
 

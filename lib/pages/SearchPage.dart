@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_ui_text/conponents/my_darwer.dart';
 import 'package:flutter_ui_text/pages/grid-list.dart';
 import 'package:flutter_ui_text/pages/searchbar.dart';
 
@@ -54,62 +56,7 @@ class _SearchPageState extends State<SearchPage> {
               }),
         ],
       ),
-      drawer: Drawer(
-        // width: MediaQuery.of(context).size.width * 0.9, //<-- SEE HERE
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.grey,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                 Column(
-                  children: [
-                     ListTile(
-                leading: const Icon(
-                  Icons.home,
-                ),
-                title: const Text('Page 1'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.train,
-                ),
-                title: const Text('Page 2'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-                  ],
-                 ),
-              
-              
-              ListTile(
-                leading: const Icon(
-                  Icons.logout_rounded,
-                ),
-                title: const Text('Log Out'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+      drawer: const MyDrawer(),
       body: Column(
         children: <Widget>[
           const SearchComp(),

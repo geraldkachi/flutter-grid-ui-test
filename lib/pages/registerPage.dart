@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_text/conponents/my_button.dart';
+import 'package:flutter_ui_text/helper/help_func.dart';
 
 class RegisterScreen extends StatefulWidget {
+  final void Function()? onTap;
+  const RegisterScreen({super.key, this.onTap});
+  
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -12,6 +18,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  Future<void> _registerUser() async {
+      showDialog(context: context,
+          builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+            )); 
+            
+    if (_passwordController.text != _confirmPasswordController.text) {
+      Navigator.pop(context);
+      displayMessageToUser("Password does not match", context);
+    }
+    try {
+      // Create a new user
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+
+      // create a new user document and add to the firestore
+      createUserDocumen(userCredential);
+
+
+      // Successfully registered
+      if (context.mounted) {
+        Navigator.pop(context); // Pop loading indicator
+        // Navigator.pushNamed(context, '/home'); // Navigate to home screen
+        displayMessageToUser("User Registered", context);
+      }
+
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context); // Pop loading indicator
+      displayMessageToUser(e.message ?? "An error occurred", context);
+    } catch (e) {
+      Navigator.pop(context); // Pop loading indicator
+      displayMessageToUser("An error occurred", context);
+      print(e); // Handle error here
+    }
+  }
+
+  Future<void> createUserDocumen(UserCredential userCredential) async {
+    if(userCredential != null && userCredential.user != null) {
+        await FirebaseFirestore.instance
+         .collection('users')
+         .doc(userCredential.user!.uid)
+         .set({
+        'username': _usernameController.text,
+        'email': userCredential.user!.email,
+      });
+      }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-               const SizedBox(height: 5),
+              const SizedBox(height: 5),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [Text("Forgot password")],
@@ -91,7 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 text: 'Register',
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, '/home');
+                    // Navigator.pushNamed(context, '/home');
+                    _registerUser();
                   }
                 },
               ),
@@ -111,7 +170,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //   child: const Text('Already have an account? Login'),
               // ),
 
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -119,9 +177,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary)),
                   TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
+                    onPressed: widget.onTap!,
+                    // onPressed: () {
+                    //   Navigator.pushNamed(context, '/login');
+                    // },
                     child: const Text('Login Here',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black)),
