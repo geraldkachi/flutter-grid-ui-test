@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui_text/pages/ExplorePage.dart';
+import 'package:flutter_ui_text/pages/HistoryPage.dart';
+import 'package:flutter_ui_text/pages/ProfilePage.dart';
 import 'package:flutter_ui_text/pages/SearchPage.dart';
+import 'package:flutter_ui_text/pages/WardrobesPage.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -12,10 +16,10 @@ class _BottomNaState extends State<BottomNav> {
    int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     const SearchPage(),
-    // const History(),
-    // const Wardrobes(),
-    // const Explore(),
-    // const Profile(),
+    const HistoryPage(),
+    const WardrobesPage(),
+    const ExplorePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped (int index) {

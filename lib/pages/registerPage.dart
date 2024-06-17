@@ -46,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (context.mounted) {
         Navigator.pop(context); // Pop loading indicator
         // Navigator.pushNamed(context, '/home'); // Navigate to home screen
-        displayMessageToUser("User Registered", context);
+        // displayMessageToUser("User Registered", context);
       }
 
     } on FirebaseAuthException catch (e) {
