@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "724514846947",
+    "project_id": "flutter-curd-auth",
+    "storage_bucket": "flutter-curd-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724514846947:android:247847eb6bb0f29e7a6dd6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_ui_text"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlaw1PaVb1Fo4IQkxGpvy_p8GmJ1dMEfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
