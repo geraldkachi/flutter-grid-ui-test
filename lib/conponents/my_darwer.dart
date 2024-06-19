@@ -27,9 +27,10 @@ class MyDrawer extends StatelessWidget {
                       leading: const Icon(
                         Icons.home,
                       ),
-                      title: const Text('Home'),
+                      title: const Text('Wall'),
                       onTap: () {
                         Navigator.pop(context);
+                        Navigator.pushNamed(context, '/wall');
                       },
                     ),
                     ListTile(

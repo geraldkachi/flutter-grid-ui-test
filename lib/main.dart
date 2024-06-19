@@ -4,6 +4,7 @@ import 'package:flutter_ui_text/pages/bottomnav.dart';
 import 'package:flutter_ui_text/pages/crud.dart';
 import 'package:flutter_ui_text/pages/loginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_ui_text/pages/wallPostPage.dart';
 import 'package:flutter_ui_text/theme/dark-mode.dart';
 import 'package:flutter_ui_text/theme/light-mode.dart';
 import 'firebase_options.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         // '/login': (context) => LoginScreen(),
         // '/register': (context) => RegisterScreen(),
         '/home': (context) => BottomNav(),
+        '/wall': (context) => WallPostPage(),
       }, 
 
       // home: const BottomNav(),  
