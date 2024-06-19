@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
         //   },
         // ),
         title: const Center(
-            child: Text("Zidio Authentication",
+            child: Text("Zidio Pr",
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,

@@ -14,7 +14,7 @@ class ExplorePage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Center(
           child: Text(
-            "Zidio Authentication",
+            "Zidio Project",
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

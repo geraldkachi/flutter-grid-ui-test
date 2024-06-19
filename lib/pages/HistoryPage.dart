@@ -24,7 +24,7 @@ class HistoryPage extends StatelessWidget {
           //   },
           // ),
           title: const Center(
-              child: Text("Zidio Authentication",
+              child: Text("Zidio Project",
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
