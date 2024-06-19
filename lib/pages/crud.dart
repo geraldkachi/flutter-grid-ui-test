@@ -64,7 +64,7 @@ class _CrudFireState extends State<CrudFire> {
               onPressed: () => Navigator.pop(context),
               child: const Text("Cancel",  style: TextStyle(color: Colors.red),)),
             TextButton(
-                  child: Text('Update', style: TextStyle(color: Colors.black),),
+                  child: const Text('Update', style: TextStyle(color: Colors.black),),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _updateStaff(staff.id); 

@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
 
     return await FirebaseFirestore.instance
         .collection('users')
-        .doc(currentUser!.email)
+        .doc(currentUser!.uid)
         .get();
   }
 

@@ -115,7 +115,7 @@ class WallPostPage extends StatelessWidget {
                                 subtitle: Text(userEmail),
                                 // subtitle: Text(posts[index].data()['time']),
                                 leading: const Icon(Icons.person),
-                                trailing: IconButton(icon: Icon(Icons.edit), 
+                                trailing: IconButton(icon: Icon(Icons.delete), 
                                 onPressed: () async {
                                      await database.deletePost(postId.id);
                                  },),
