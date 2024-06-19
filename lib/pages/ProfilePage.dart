@@ -80,35 +80,39 @@ class ProfilePage extends StatelessWidget {
             final username = user['username'] ?? 'No username';
             final email = user['email'] ?? 'No email';
 
-            return Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(25),
+                    child: const Icon(Icons.person, size: 100),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    email,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  padding: const EdgeInsets.all(25),
-                  child: const Icon(Icons.person, size: 100),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  email,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  const SizedBox(height: 10),
+                  Text(
+                    username,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  username,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+                ],
+              ),
             );
           } else {
             return const Center(
