@@ -34,13 +34,13 @@ class MyApp extends StatelessWidget {
       // ),
       theme: lightMode,
       darkTheme: darkMode,
-       home: LoginScreen(),
+       home: const LoginScreen(),
       routes: {
-        '/lg': (context) => AuthPage(),
-        '/crud': (context) => CrudFire(),
+        '/lg': (context) => const AuthPage(),
+        '/crud': (context) => const CrudFire(),
         // '/login': (context) => LoginScreen(),
         // '/register': (context) => RegisterScreen(),
-        '/home': (context) => BottomNav(),
+        '/home': (context) => const BottomNav(),
         '/wall': (context) => WallPostPage(),
       }, 
 

@@ -129,26 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     if (_formKey.currentState!.validate()) {
-              //       // Perform login action
-              //       Navigator.pushNamed(context, '/home');
-              //     }
-              //   },
-              //   child: Text('Login'),
-              // ),
-              TextButton(
-                onPressed: () {
-                  if (widget.onTap != null) {
-                      widget.onTap!();
-                    }
-                },
-                // onPressed: () {
-                //   Navigator.pushNamed(context, '/register');
-                // },
-                child: Text('Don\'t have an account? Register'),
-              ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

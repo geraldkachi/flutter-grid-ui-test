@@ -1,10 +1,11 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_ui_text/conponents/my_darwer.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 
 
 
@@ -19,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   // Current user
   final User? currentUser = FirebaseAuth.instance.currentUser;
   File? _image;
-  final picker = ImagePicker();
+  // final picker = ImagePicker();
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetail() async {
     if (currentUser == null) {
@@ -32,40 +33,39 @@ class _ProfilePageState extends State<ProfilePage> {
         .get();
   }
 
-  Future pickImage() async {
-    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  // Future pickImage() async {
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _image = File(pickedFile.path);
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
   
 
-  Future uploadImage() async {
-    if (_image == null) return;
+  // Future uploadImage() async {
+  //   if (_image == null) return;
 
-    try {
-      final storageRef = FirebaseStorage.instance
-          .ref()
-          .child('profileImages')
-          .child(currentUser!.uid + '.jpg');
-      await storageRef.putFile(_image!);
+  //   try {
+  //     final storageRef = FirebaseStorage.instance
+  //         .ref()
+  //         .child('profileImages')
+  //         .child(currentUser!.uid + '.jpg');
+  //     await storageRef.putFile(_image!);
 
-      final imageUrl = await storageRef.getDownloadURL();
-      await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).update({
-        'profileImageUrl': imageUrl,
-      });
+  //     final imageUrl = await storageRef.getDownloadURL();
+  //     await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).update({
+  //       'profileImageUrl': imageUrl,
+  //     });
 
-      print('Profile image uploaded and URL saved to Firestore.');
-    } catch (e) {
-      print('Failed to upload image: $e');
-    }
-  }
+  //     print('Profile image uploaded and URL saved to Firestore.');
+  //   } catch (e) {
+  //     print('Failed to upload image: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -135,22 +135,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
-                  _image == null
-                      ? (profileImageUrl.isNotEmpty
-                          ? Image.network(profileImageUrl, height: 150)
-                          : const Icon(Icons.person, size: 100))
-                      : Image.file(_image!, height: 150),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: pickImage,
-                    child: const Text('Pick Image'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: uploadImage,
-                    child: const Text('Upload Image'),
-                  ),
+                  // const SizedBox(height: 20),
+                  // _image == null
+                  //     ? (profileImageUrl.isNotEmpty
+                  //         ? Image.network(profileImageUrl, height: 150)
+                  //         : const Icon(Icons.person, size: 100))
+                  //     : Image.file(_image!, height: 150),
+                  // const SizedBox(height: 20),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   // onPressed: pickImage,
+                  //   child: const Text('Pick Image'),
+                  // ),
+                  // const SizedBox(height: 20),
+                  // ElevatedButton(
+                  //   onPressed: (){},
+                  //   // onPressed: uploadImage,
+                  //   child: const Text('Upload Image'),
+                  // ),
+                  const Icon(Icons.person, size: 100),
                   const SizedBox(height: 20),
                   Text(
                     email,

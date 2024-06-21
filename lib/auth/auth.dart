@@ -12,12 +12,12 @@ class AuthPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           if (snapshot.hasData) {
-            return BottomNav();
+            return const BottomNav();
           }
-          return LoginOrRegister();
+          return const LoginOrRegister();
         });;
   }
 }

@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
 
         // leading: IconButton(
         //   icon: const Icon(Icons.menu),
@@ -49,10 +49,10 @@ class _SearchPageState extends State<SearchPage> {
               color: Colors.white,
               iconSize: 30.0,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Container()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Container()),
+                // );
               }),
         ],
       ),

@@ -88,7 +88,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 accountName: Text(username ?? 'Loading...'),
                 accountEmail: Text(email ?? 'Loading...'),
                 currentAccountPicture: GestureDetector(
-                  onTap: _pickAndUploadImage,
+                  onTap: (){},
+                  // onTap: _pickAndUploadImage,
                   child: CircleAvatar(
                     child: ClipOval(
                       child: profileImageUrl != null
