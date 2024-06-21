@@ -14,8 +14,6 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  final User? currentUser = FirebaseAuth.instance.currentUser;
-
   final User? user = FirebaseAuth.instance.currentUser;
   String? profileImageUrl;
   String? username;
@@ -31,10 +29,10 @@ class _MyDrawerState extends State<MyDrawer> {
 
   // Get the logged-in user details
   Future<void> _loadUserDetails() async {
-    if (currentUser != null) {
+    if (user != null) {
       final doc = await FirebaseFirestore.instance
           .collection('users')
-          .doc(currentUser!.uid)
+          .doc(user!.uid)
           .get();
       final userData = doc.data();
       if (userData != null) {
