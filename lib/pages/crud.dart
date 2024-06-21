@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_text/conponents/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_ui_text/conponents/my_darwer.dart';
 
 class CrudFire extends StatefulWidget {
   const CrudFire({super.key});
@@ -110,6 +111,7 @@ class _CrudFireState extends State<CrudFire> {
         appBar: AppBar(
           title: const Text("Firebase Crud"),
         ),
+        drawer: const MyDrawer(),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(

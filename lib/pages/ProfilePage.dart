@@ -1,12 +1,25 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_ui_text/conponents/my_darwer.dart';
 
-class ProfilePage extends StatelessWidget {
+
+
+class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   // Current user
   final User? currentUser = FirebaseAuth.instance.currentUser;
+  File? _image;
+  final picker = ImagePicker();
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetail() async {
     if (currentUser == null) {
@@ -17,6 +30,41 @@ class ProfilePage extends StatelessWidget {
         .collection('users')
         .doc(currentUser!.uid)
         .get();
+  }
+
+  Future pickImage() async {
+    // final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+  
+
+  Future uploadImage() async {
+    if (_image == null) return;
+
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('profileImages')
+          .child(currentUser!.uid + '.jpg');
+      await storageRef.putFile(_image!);
+
+      final imageUrl = await storageRef.getDownloadURL();
+      await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).update({
+        'profileImageUrl': imageUrl,
+      });
+
+      print('Profile image uploaded and URL saved to Firestore.');
+    } catch (e) {
+      print('Failed to upload image: $e');
+    }
   }
 
   @override
@@ -51,6 +99,7 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: const MyDrawer(),
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: getUserDetail(),
         builder: (context, snapshot) {
@@ -79,22 +128,28 @@ class ProfilePage extends StatelessWidget {
             // Safely access the fields with null checks
             final username = user['username'] ?? 'No username';
             final email = user['email'] ?? 'No email';
+            final profileImageUrl = user['profileImageUrl'] ?? '';
 
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                    ),
-                    padding: const EdgeInsets.all(25),
-                    child: const Icon(Icons.person, size: 100),
+                  const SizedBox(height: 20),
+                  _image == null
+                      ? (profileImageUrl.isNotEmpty
+                          ? Image.network(profileImageUrl, height: 150)
+                          : const Icon(Icons.person, size: 100))
+                      : Image.file(_image!, height: 150),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: pickImage,
+                    child: const Text('Pick Image'),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: uploadImage,
+                    child: const Text('Upload Image'),
                   ),
                   const SizedBox(height: 20),
                   Text(

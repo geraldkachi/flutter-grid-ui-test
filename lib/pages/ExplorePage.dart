@@ -88,11 +88,11 @@ class ExplorePage extends StatelessWidget {
                     return ListTile(
                       title: Text(username),
                       subtitle: Text(email),
-                      leading: Icon(Icons.person),
+                      leading: const Icon(Icons.person),
                       
-                      trailing: IconButton(icon: Icon(Icons.delete), 
+                      trailing: IconButton(icon: const Icon(Icons.headphones), 
                       onPressed: () async {
-                                print(index);
+                              // print(index);
                               //  await database.deletePost(index.toString());
                               //  await database.deletePost(message);
                                },

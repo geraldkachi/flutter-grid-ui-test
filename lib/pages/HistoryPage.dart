@@ -10,7 +10,7 @@ class HistoryPage extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           backgroundColor: Colors.grey,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
 
           // leading: IconButton(
           //   icon: const Icon(Icons.menu),
@@ -27,7 +27,7 @@ class HistoryPage extends StatelessWidget {
               child: Text("Zidio Project",
                   style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ))),
           elevation: 0.0,
@@ -58,7 +58,7 @@ class HistoryPage extends StatelessWidget {
               padding: const EdgeInsets.all(25),
               child: const Icon(Icons.person),
             ),
-            Text('History'),
+            const Text('History'),
           ],
         ));
   }
